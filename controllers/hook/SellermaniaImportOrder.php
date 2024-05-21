@@ -504,7 +504,7 @@ class SellermaniaImportOrderController
         $this->address->phone_mobile = $phone_mobile;
         $this->address->id_customer = $this->customer->id;
         if ($type == 'Shipping' && isset($this->data['OrderInfo']['DeliveryInstructions'])) {
-            $this->address->other = $this->data['OrderInfo']['DeliveryInstructions'];
+            $this->address->other = str_replace(['<', '>', '{', '}'], ['(', ')', '(', ')'], $this->data['OrderInfo']['DeliveryInstructions']);
         }
         $this->address->active = 1;
         if (substr(_PS_VERSION_, 0, 3) == '1.4')
